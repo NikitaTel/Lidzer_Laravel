@@ -35,3 +35,4 @@
 
     <h1 class="main-title"><a href="{{route('home')}}">TWINPIXEL</a></h1>
     <h3 class="spark-ar">SPARK AR STUDIO | 2020</h3>
+    <div class="background-main-image"></div>

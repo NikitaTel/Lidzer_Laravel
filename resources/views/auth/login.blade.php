@@ -8,13 +8,13 @@
 
 
 
-                                <input placeholder="Логин" id="login" type="login" class="form-control  style-input" name="login" value="{{ old('email') }}" required autocomplete="login" autofocus>
+                                <input placeholder="Эл. почта" id="email" type="email" class="form-control  style-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-{{--                                @error('email')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @enderror--}}
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
                                 <input placeholder="Пароль" id="password" type="password" class="form-control @error('password') is-invalid @enderror style-input" name="password" required autocomplete="current-password">
 

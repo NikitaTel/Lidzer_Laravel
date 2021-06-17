@@ -2,95 +2,99 @@
 
 @section('content')
     @if(\Illuminate\Support\Facades\Auth::user()->id_role ==1)
-        <div class="admin-headers">
-            <h1 class="admin-header">Новая маска</h1>
-            <h1 class="admin-header">Удаление маски</h1>
-            <h1 class="admin-header">Конструкторы</h1>
-            <h1 class="admin-header">Маски</h1>
-            <h1 class="admin-header">Пользователи</h1>
-        </div>
-
-        <form class="admin-submit" method="post" action="{{route('addMask')}}" enctype="multipart/form-data">
-        {{ csrf_field() }}
-            <div class="admin-add">
-                <div>
-                    <label for="name">название маски</label>
-                    <input type="text" name="name" id="name" required>
-                </div>
-                <div>
-                    <label for="category">категория</label>
-                    <input type="text" name="category" id="category" required>
-                </div>
-                <div>
-                    <label for="price">цена</label>
-                    <input type="text" name="price" id="price" required>
-                </div>
-                <div>
-                    <label for="image">фото маски</label>
-                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" required>
-                </div>
-                <div>
-                    <label for="qr">qr-код</label>
-                    <input type="file" name="qr" id="qr" accept=".jpg, .jpeg, .png, .gif" required  >
-                </div>
+        <section class="admin-panel">
+            <div class="admin-headers">
+                <h1 class="admin-header">Новый эффект</h1>
+                <h1 class="admin-header">Удалить эффект</h1>
+                <h1 class="admin-header">Индивидуальный заказ</h1>
+                <h1 class="admin-header">История заказов</h1>
+                <h1 class="admin-header">Пользователи</h1>
+                <h1 class="admin-header">Добавить новость</h1>
             </div>
-            @if($errors->any())
-                <div class="alert">
-                    <ul>
-                        @foreach($errors ->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+
+            <form class="admin-submit" method="post" action="{{route('addMask')}}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="admin-add">
+                    <div>
+                        <label for="name">название маски</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div>
+                        <label for="category">категория</label>
+                        <input type="text" name="category" id="category" required>
+                    </div>
+                    <div>
+                        <label for="price">цена</label>
+                        <input type="text" name="price" id="price" required>
+                    </div>
+                    <div>
+                        <label for="image">фото маски</label>
+                        <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" required>
+                    </div>
+                    <div>
+                        <label for="qr">qr-код</label>
+                        <input type="file" name="qr" id="qr" accept=".jpg, .jpeg, .png, .gif" required  >
+                    </div>
                 </div>
-            @endif
+                @if($errors->any())
+                    <div class="alert">
+                        <ul>
+                            @foreach($errors ->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-            <input type="submit" value="Добавить">
-        </form>
+                <input type="submit" value="Добавить">
+            </form>
 
-        <section class="admin-delete-mask">
-            <ul class="order-headers">
-                <li>Id</li>
-                <li>Название</li>
-                <li>Фото</li>
-            </ul>
-            <ul class="admin-delete-mask-ul">
-                @foreach(\App\Mask::all() as $mask)
-                    <li>
-                        <div>{{$mask->id}}</div>
-                        <div>{{$mask->mask_name}}</div>
-                        <img src="{{'/storage/' . $mask->mask_img}}" width="150" alt="{{$mask->mask_name}}}">
-                        <div>
-                            <a href="{{route('removeMask', ['id'=>$mask->id])}}">
-                                <div class="remove-cart">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </section>
 
-        <section class="admin-list">
 
-            <ul class="order-headers">
-                <li>Номер</li>
-                <li>Статус</li>
-                <li>Описание</li>
-                <li>Прикреплённое фото</li>
-            </ul>
+            <section class="admin-delete-mask">
+                <ul class="order-headers">
+                    <li>Id</li>
+                    <li>Название</li>
+                    <li>Фото</li>
+                </ul>
+                <ul class="admin-delete-mask-ul">
+                    @foreach(\App\Mask::all() as $mask)
+                        <li>
+                            <div>{{$mask->id}}</div>
+                            <div>{{$mask->mask_name}}</div>
+                            <img src="{{'/storage/' . $mask->mask_img}}" width="150" alt="{{$mask->mask_name}}}">
+                            <div>
+                                <a href="{{route('removeMask', ['id'=>$mask->id])}}">
+                                    <div class="remove-cart">
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
 
-            <ul class="constructors-list">
-                @foreach(\App\Constructor::all() as $constructor)
+            <section class="admin-list">
 
-                    <li  @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>
-                        <div>{{$constructor->id}}</div>
-                        <div>{{$constructor->constructor_status}}</div>
-                        <textarea class="constructors-list-description"  readonly @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>{{$constructor->constructor_description}}</textarea>
+                <ul class="order-headers">
+                    <li>Номер</li>
+                    <li>Статус</li>
+                    <li>Описание</li>
+                    <li>Прикреплённое фото</li>
+                </ul>
 
-                        <div>
-                            <img width="203px" src="{{asset('/storage/' . $constructor->constructor_image)}}" alt="">
-                        </div>
-                    </li>
+                <ul class="constructors-list">
+                    @foreach(\App\Constructor::all() as $constructor)
+
+                        <li  @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>
+                            <div>{{$constructor->id}}</div>
+                            <div>{{$constructor->constructor_status}}</div>
+                            <textarea class="constructors-list-description"  readonly @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>{{$constructor->constructor_description}}</textarea>
+
+                            <div>
+                                <img width="203px" src="{{asset('/storage/' . $constructor->constructor_image)}}" alt="">
+                            </div>
+                        </li>
                         @if($constructor->constructor_status=='Анализ заказа')
                             <form action="{{route('changeStatus',['id'=>$constructor->id])}}" method="post">
                                 @csrf
@@ -113,24 +117,24 @@
 
 
 
-                @endforeach
+                    @endforeach
 
-            </ul>
-        </section>
+                </ul>
+            </section>
 
-        <section class="admin-masks-list">
-            <ul class="order-headers">
-                <li>Id Заказа</li>
-                <li>Id Пользователя</li>
-                <li>Маски</li>
-                <li>Стоимость</li>
-            </ul>
-            <ul class="admin-masks-list-ul">
-                @foreach(\App\Order::all() as $order)
-                    <li>
-                        <div>{{$order->id}}</div>
-                        <div>{{$order->user_id}}</div>
-                        <ul>
+            <section class="admin-masks-list">
+                <ul class="order-headers">
+                    <li>Id Заказа</li>
+                    <li>Id Пользователя</li>
+                    <li>Маски</li>
+                    <li>Стоимость</li>
+                </ul>
+                <ul class="admin-masks-list-ul">
+                    @foreach(\App\Order::all() as $order)
+                        <li>
+                            <div>{{$order->id}}</div>
+                            <div>{{$order->user_id}}</div>
+                            <ul>
 
                                 @foreach(\App\DetailedCart::all()->where('order_id', $order->id) as $detailedCart)
                                     <li>
@@ -141,39 +145,42 @@
 
                                 @endforeach
 
-                        </ul>
-                        <div>{{$order->price}}</div>
-                    </li>
-                @endforeach
-            </ul>
+                            </ul>
+                            <div>{{$order->price}}</div>
+                        </li>
+                    @endforeach
+                </ul>
 
+            </section>
+
+            <section class="admin-users-list">
+                <ul class="order-headers">
+                    <li>Id</li>
+                    <li>Логин</li>
+                    <li>Эл. почта</li>
+                </ul>
+                <ul class="admin-users-list-ul">
+                    @foreach(\App\User::all() as $user)
+                        @if($user->id != 1)
+                            <li>
+                                <div>{{$user->id}}</div>
+                                <div>{{$user->login}}</div>
+                                <div>{{$user->email}}</div>
+                                <div>
+                                    <a href="{{route('removeUser', ['id'=>$user->id])}}">
+                                        <div class="remove-cart">
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        @endif
+
+                    @endforeach
+                </ul>
+            </section>
         </section>
 
-        <section class="admin-users-list">
-            <ul class="order-headers">
-                <li>Id</li>
-                <li>Логин</li>
-                <li>Эл. почта</li>
-            </ul>
-            <ul class="admin-users-list-ul">
-            @foreach(\App\User::all() as $user)
-                @if($user->id != 1)
-                <li>
-                    <div>{{$user->id}}</div>
-                    <div>{{$user->login}}</div>
-                    <div>{{$user->email}}</div>
-                    <div>
-                        <a href="{{route('removeUser', ['id'=>$user->id])}}">
-                            <div class="remove-cart">
-                            </div>
-                        </a>
-                    </div>
-                </li>
-                    @endif
-
-                @endforeach
-            </ul>
-        </section>
+        @include('admin.addBlog')
     @else
         <div class="user-headers">
             <h1 class="constructors-header">Мои контрукторы</h1>
@@ -210,7 +217,7 @@
 
                         @if($constructor->constructor_price !=null)
                             <section class="download">
-                                <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.rar')}}" download>скачать файл с инструкциями</a></div>
+                                <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл с инструкциями</a></div>
                             </section>
                         @endif
                     @endif
@@ -236,7 +243,7 @@
                                         </div>
                                     </div>
                                     <section class="download">
-                                        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.rar')}}" download>скачать файл с инструкциями</a></div>
+                                        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл с инструкциями</a></div>
                                     </section>
                                 </div>
                             @endforeach
@@ -260,28 +267,32 @@
 
         $('.admin-header:nth-child(1)').click(function(){
             $('.admin-submit').slideToggle();
-            $('.admin-delete-mask, .admin-users-list, .admin-list, .admin-masks-list').css('display','none');
+            $('.admin-delete-mask,.admin-add-post,  .admin-users-list, .admin-list, .admin-masks-list').css('display','none');
         });
 
         $('.admin-header:nth-child(2)').click(function(){
             $('.admin-delete-mask').slideToggle();
-            $('.admin-submit, .admin-users-list, .admin-list, .admin-masks-list').css('display','none');
+            $('.admin-submit, .admin-add-post, .admin-users-list, .admin-list, .admin-masks-list').css('display','none');
         });
 
         $('.admin-header:nth-child(3)').click(function(){
             $('.admin-list').slideToggle();
-            $('.admin-delete-mask, .admin-users-list, .admin-submit, .admin-masks-list').css('display','none');
+            $('.admin-delete-mask,.admin-add-post,  .admin-users-list, .admin-submit, .admin-masks-list').css('display','none');
         });
 
         $('.admin-header:nth-child(4)').click(function(){
             $('.admin-masks-list').slideToggle();
-            $('.admin-delete-mask, .admin-users-list, .admin-list, .admin-submit').css('display','none');
+            $('.admin-delete-mask,.admin-add-post,  .admin-users-list, .admin-list, .admin-submit').css('display','none');
         });
 
         $('.admin-header:nth-child(5)').click(function(){
             $('.admin-users-list').slideToggle();
-            $('.admin-delete-mask, .admin-list, .admin-masks-list, .admin-submit').css('display','none');
+            $('.admin-delete-mask, .admin-add-post, .admin-list, .admin-masks-list, .admin-submit').css('display','none');
         });
 
+        $('.admin-header:nth-child(6)').click(function(){
+            $('.admin-add-post').slideToggle();
+            $('.admin-delete-mask, .admin-users-list .admin-list, .admin-masks-list, .admin-submit').css('display','none');
+        });
     </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Auth;
+use App\Blog;
 use App\Http\Controllers\DeleteUserController;
 use App\Http\Controllers\HomeController;
 
@@ -68,7 +69,12 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/blogs', function () {
+    return view('blogs', ['blogs' => Blog::all()]);
+})->name('blogs');
+
 Route::post('/profile/add', 'AddNewMask@add')->name('addMask');
+Route::post('/addpost', 'AddBlog@add')->name('addpost');
 
 Route::get('/add-to-cart/{id}', [
     'uses' => 'CartController@addToCart'

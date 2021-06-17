@@ -7,16 +7,7 @@ use Illuminate\Http\Request;
 use App\Mask;
 class AddNewMask extends Controller
 {
-    public function add(AddMaskRequest $request) {
-        $validation = $request->validate([
-           'name'=> 'required',
-           'category' => 'required',
-           'price' => 'required',
-            'image' => 'required',
-            'qr' => 'required'
-        ]);
-
-
+    public function add(Request $request) {
         $name = $request->input('name');
         $category = $request->input('category');
         $price = $request->input('price');

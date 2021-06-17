@@ -15,6 +15,6 @@
     </section>
 
     <section class="download">
-        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.rar')}}">скачать файл с инструкциями</a></div>
+        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}">скачать файл с инструкциями</a></div>
     </section>
 @endsection

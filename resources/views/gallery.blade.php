@@ -45,7 +45,7 @@
         @foreach($masks as $mask)
             @if($mask->category_id==1)
             <div class="catalog-element">
-                <div class="mask-mobile"><div class="mask-image" style="background: url({{asset('/storage/' . $mask->mask_img) }});background-size: 100% 100%;"></div></div>
+                <div class="mask-mobile"><div class="mask-image" style="background: url({{asset('/storage/' . $mask->mask_img) }}) center / cover no-repeat"></div></div>
                 <div class="mask-wrapper">
                     <div class="mask-description">
                         <div class="mask-name">{{$mask->mask_name}}</div>

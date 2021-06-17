@@ -12,14 +12,14 @@ html {
   min-height: 110vh;
 }
 
-body {
-  width: 1000px;
-  margin: auto;
-}
-
 @font-face {
   font-family: "Slim Joe";
   src: url(/fonts/SlimJoe-400.otf?c1fcde7db6225897ef15dfa64da74d9a);
+}
+
+@font-face {
+  font-family: "Cormorant SC Regular";
+  src: url(/fonts/CormorantSC-Regular.ttf);
 }
 
 @font-face {
@@ -67,6 +67,7 @@ body {
 
 .main-pods {
   margin-top: 150px;
+  padding: 0 5%;
 }
 
 header > ul {
@@ -459,6 +460,8 @@ section li {
   z-index: -1;
   left: 21px;
   width: 239px;
+  background-size: COVER;
+  background-position: center;
 }
 
 .mask-name {
@@ -684,20 +687,26 @@ section li {
 
 .order-information .order-description {
   z-index: 2;
-  background: url(/images/order-input-borders.png?2a9a9b5d47d3c6e8f27b45670857c518);
   width: 775px;
   height: 367px;
-  margin-left: auto;
+  margin: auto;
 }
 
 .order-information textarea {
-  background: url(/images/order-input.png?20f638ba408517be8f704ac1cd2dd606);
   border: none;
   width: 100%;
   background-size: 100% 100%;
   height: 366px;
   padding: 10px 0 0 10px;
   white-space: pre-wrap;
+  color: #878787;
+  font-family: Mont;
+  letter-spacing: 3px;
+  font-weight: 100;
+  padding: 10px 10px;
+  font-family: Mont;
+  border-radius: 18px;
+  border: 1px solid #c3c3c3;
 }
 
 textarea {
@@ -714,26 +723,44 @@ textarea:focus {
 }
 
 .order-information .order-information-submit {
-  background: url(/images/order-button.png?fe4c9d3a641348a78a6ed311d8c1cc1b);
-  border: none;
-  padding: 10px 20px;
-  background-size: 100% 100%;
+  font-family: Mont;
   font-size: 15px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 20px;
+  width: 100%;
+  outline: none !important;
+  border: none;
+  background: -webkit-linear-gradient(right, rgba(255, 0, 0, 0.6), rgba(120, 161, 149, 0.85) 48%);
   display: block;
-  margin: 20px 0 10px auto;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 40px 0;
+  width: 200px !important;
+  margin: auto;
   text-align: center;
+}
+
+.admin-add-post {
+  display: none;
 }
 
 .order-information .order-file-wrapper {
   position: relative;
   display: block;
   width: 108px;
-  margin-left: auto;
+  margin: auto;
+  left: 64px;
 }
 
 .order-information .order-file-wrapper span.order-information-submit {
   width: 108px;
-  color: #878787;
+  color: #fff;
   font-family: Mont;
   letter-spacing: 3px;
   font-weight: 100;
@@ -756,7 +783,7 @@ textarea:focus {
 .order-information p {
   font-size: 15px;
   line-height: 28px;
-  text-align: end;
+  text-align: center;
   margin-top: 30px;
 }
 
@@ -767,7 +794,7 @@ textarea:focus {
 .order-information h3,
 .order-information h4 {
   margin-bottom: 10px;
-  text-align: end;
+  text-align: center;
   padding-right: 50px;
 }
 
@@ -934,11 +961,13 @@ textarea:focus {
   margin: 0 auto 10px 66px;
 }
 
-.admin-submit {
+.admin-submit,
+.admin-add-post {
   margin-top: 50px;
 }
 
-.admin-submit .admin-add {
+.admin-submit .admin-add,
+.admin-add-post .admin-add {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -947,17 +976,52 @@ textarea:focus {
   height: 158px;
 }
 
-.admin-submit .admin-add > div {
+.admin-add-post .admin-add {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: auto;
+}
+
+.admin-add-post textarea {
+  border: none;
+  width: 100%;
+  background-size: 100% 100%;
+  height: 366px;
+  padding: 10px 0 0 10px;
+  white-space: pre-wrap;
+  color: #878787;
+  font-family: Mont;
+  letter-spacing: 3px;
+  font-weight: 100;
+  padding: 10px 10px;
+  font-family: Mont;
+  border-radius: 18px;
+  border: 1px solid #c3c3c3;
+}
+
+.admin-add-post .admin-add > div {
+  margin-bottom: 20px;
+}
+
+.admin-add-post .admin-add input {
+  width: 50%;
+  margin: auto;
+}
+
+.admin-submit .admin-add > div,
+.admin-add-post .admin-add > div {
   display: flex;
   flex-direction: column;
 }
 
-.admin-submit label {
+.admin-submit label,
+.admin-add-post label {
   font-family: Mont;
   margin: auto;
 }
 
-.admin-submit input {
+.admin-submit input,
+.admin-add-post input {
   margin-top: 5px;
   padding: 10px 10px;
   font-family: Mont;
@@ -965,11 +1029,13 @@ textarea:focus {
   border: 1px solid #c3c3c3;
 }
 
-.admin-submit input:focus {
+.admin-submit input:focus,
+.admin-add-post input:focus {
   outline: none;
 }
 
-.admin-submit > input {
+.admin-submit > input,
+.admin-add-post > input {
   display: block;
   margin: 50px auto;
   padding: 15px 40px;
@@ -1386,5 +1452,63 @@ a.active-pod {
 .objects .mask-image {
   left: 15px;
   width: 252px;
+}
+
+.admin-panel {
+  padding: 0 26px;
+}
+
+.blog {
+  width: 450px;
+  font-family: "Cormorant SC Regular";
+}
+
+.blog p {
+  text-align: right;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+.blog h2 {
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: right;
+  text-decoration: underline;
+  -webkit-text-decoration-style: dashed;
+          text-decoration-style: dashed;
+  text-underline-position: under;
+  margin-bottom: 10px;
+}
+
+.blog .date {
+  text-align: right;
+}
+
+.blog:nth-child(2n) {
+  margin-left: auto;
+  margin-top: -38%;
+}
+
+.blog:nth-child(2n) .date {
+  text-align: left;
+}
+
+.blog:nth-child(2n) h2 {
+  text-align: left;
+}
+
+.blog:nth-child(2n) p {
+  text-align: left;
+}
+
+.blog img {
+  max-width: 100%;
+}
+
+.blogs-section {
+  max-width: 1240px;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
 }
 

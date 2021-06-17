@@ -31,10 +31,10 @@
             </a>
         </div>
         <div class="pod-wrapper">
-            <a href="{{route('questions')}}">
+            <a href="{{route('blogs')}}">
                 <div class="pod-image">
-                    <h3>ЧАСТЫЕ ВОПРОСЫ</h3>
-                    <h3 class="opacity">ВОПРОСЫ</h3>
+                    <h3>БЛОГ</h3>
+                    <h3 class="opacity">БЛОГ</h3>
                 </div>
             </a>
         </div>
