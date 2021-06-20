@@ -15,6 +15,10 @@
     </section>
 
     <section class="download">
-        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}">скачать файл с инструкциями</a></div>
+        <div class="cart-next" style="
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 12%;
+" ><a style="padding: 13px 40px;" href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}">скачать файл</a></div>
     </section>
 @endsection

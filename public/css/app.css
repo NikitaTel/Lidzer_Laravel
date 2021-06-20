@@ -930,6 +930,7 @@ textarea:focus {
   margin: 20px 20px 0 auto;
   font-family: Mont;
   margin-bottom: 50px;
+    background: -webkit-linear-gradient(right, rgba(255, 0, 0, 0.6), rgba(120, 161, 149, 0.85) 48%);
 }
 
 .cart-products .cart-next a {
@@ -968,12 +969,16 @@ textarea:focus {
 
 .admin-submit .admin-add,
 .admin-add-post .admin-add {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 723px;
-  margin: auto;
-  height: 158px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 690px;
+    margin: auto;
+    height: 158px;
+}
+
+.admin-add input {
+    width: 200px;
 }
 
 .admin-add-post .admin-add {
@@ -1125,18 +1130,16 @@ input[type=file],
 
 .user-constructor-list {
   display: none;
+    padding: 0 26px;
+    padding-bottom: 60px;
 }
 
 .user-constructor-list .order-headers {
   padding: 0 53px;
 }
 
-.user-constructor-list .order-headers li:nth-child(2) {
-  margin-left: -118px;
-}
-
 .user-constructor-list .constructors-list-description {
-  width: 300px;
+  width: 500px;
   height: 200px;
   overflow: auto;
   font-family: Mont;
@@ -1224,6 +1227,11 @@ a.active-pod {
 .download {
   margin: 50px 0 0 86px;
 }
+.payment {
+    margin: 10px 0 0 86px;
+    display: flex;
+    justify-content: center;
+}
 
 .payment a,
 .download a {
@@ -1232,6 +1240,15 @@ a.active-pod {
   color: white;
   padding: 10px 15px;
   border-radius: 20px;
+}
+
+.download a {
+    background: -webkit-linear-gradient(right, rgba(255, 0, 0, 0.6), rgba(120, 161, 149, 0.85) 48%);
+}
+
+.payment a {
+    background: -webkit-linear-gradient(right, rgba(255, 0, 0, 0.6), rgba(120, 161, 149, 0.85) 48%);
+    padding: 13px 40px;
 }
 
 .cart-products.payment .cart-cost {
@@ -1336,7 +1353,7 @@ a.active-pod {
 }
 
 .catalog {
-  margin-bottom: 50px;
+  margin-bottom: 120px;
 }
 
 .selfi .mask-mobile {

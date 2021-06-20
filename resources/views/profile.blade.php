@@ -28,12 +28,14 @@
                         <input type="text" name="price" id="price" required>
                     </div>
                     <div>
-                        <label for="image">фото маски</label>
+                        <label for="image" style="margin: 20px auto;">фото эффекта</label>
                         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" required>
                     </div>
                     <div>
-                        <label for="qr">qr-код</label>
-                        <input type="file" name="qr" id="qr" accept=".jpg, .jpeg, .png, .gif" required  >
+                        <label for="qr" style="margin: 20px auto;">qr-код</label>
+
+                        <input type="file" name="qr" id="qr" accept=".jpg, .jpeg, .png, .gif" required>
+                        <input type="text" placeholder="по ссылке">
                     </div>
                 </div>
                 @if($errors->any())
@@ -46,10 +48,8 @@
                     </div>
                 @endif
 
-                <input type="submit" value="Добавить">
+                <input type="submit" value="Добавить" style="margin: 100px auto;">
             </form>
-
-
 
             <section class="admin-delete-mask">
                 <ul class="order-headers">
@@ -85,18 +85,13 @@
 
                 <ul class="constructors-list">
                     @foreach(\App\Constructor::all() as $constructor)
-
-                        <li  @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>
-                            <div>{{$constructor->id}}</div>
-                            <div>{{$constructor->constructor_status}}</div>
-                            <textarea class="constructors-list-description"  readonly @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>{{$constructor->constructor_description}}</textarea>
-
-                            <div>
-                                <img width="203px" src="{{asset('/storage/' . $constructor->constructor_image)}}" alt="">
-                            </div>
-                        </li>
                         @if($constructor->constructor_status=='Анализ заказа')
-                            <form action="{{route('changeStatus',['id'=>$constructor->id])}}" method="post">
+                            <form action="{{route('changeStatus',['id'=>$constructor->id])}}" method="post"
+                            style="display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 888px;
+    margin-left: auto;">
                                 @csrf
                                 @if($errors->any())
                                     <div class="alert">
@@ -108,14 +103,22 @@
                                     </div>
                                 @endif
                                 <input required type="text" placeholder="ввести цену" name="price" id="price">
-
+                                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .gif">
+                                <input type="text" placeholder="по ссылке">
                                 <button type="submit">
                                     Подтвердить заказ
                                 </button>
                             </form>
                         @endif
+                        <li style=" margin: 50px 0 10px 0;"  @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif >
+                            <div>{{$constructor->id}}</div>
+                            <div>{{$constructor->constructor_status}}</div>
+                            <textarea class="constructors-list-description"  readonly @if($constructor->constructor_status=='Подтверждён') style="background: #f8f8f8;" @endif>{{$constructor->constructor_description}}</textarea>
 
-
+                            <div style="margin-right: 26px;">
+                                <img width="203px" src="{{asset('/storage/' . $constructor->constructor_image)}}" alt="">
+                            </div>
+                        </li>
 
                     @endforeach
 
@@ -183,8 +186,8 @@
         @include('admin.addBlog')
     @else
         <div class="user-headers">
-            <h1 class="constructors-header">Мои контрукторы</h1>
-            <h1 class="constructors-header">Мои маски</h1>
+            <h1 class="constructors-header">Индивидуальный заказ</h1>
+            <h1 class="constructors-header">Моя галлерея эффектов</h1>
         </div>
 
         <section class="user-constructor-list">
@@ -193,13 +196,12 @@
                 <li>Статус</li>
                 <li>Описание</li>
                 <li>Приложение</li>
-                <li>Цена</li>
             </ul>
 
             <ul class="constructors-list">
                 @foreach(\App\Constructor::all() as $constructor)
                     @if($constructor->user_id==\Illuminate\Support\Facades\Auth::user()->id)
-                        <li>
+                        <li style="margin: 50px 0 10px 0;">
                             <div>{{$constructor->constructor_status}}</div>
                             <textarea class="constructors-list-description">{{$constructor->constructor_description}}</textarea>
 
@@ -207,19 +209,36 @@
                                 <img width="150px" src="{{asset('/storage/' . $constructor->constructor_image)}}" alt="">
                             </div>
 
-
-                            @if($constructor->constructor_price !=null)
-                                <div>{{$constructor->constructor_price}} BYN</div>
-                            @else
-                                <div>Цена не определена</div>
-                            @endif
                         </li>
 
                         @if($constructor->constructor_price !=null)
-                            <section class="download">
-                                <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл с инструкциями</a></div>
+                            <section class="download" style="display: flex;
+                                                flex-direction: column;
+                                                width: max-content;
+                                                justify-content: space-between;
+                                                margin: -20px 0 50px auto;
+                                                align-items: center;">
+                                 <div style="    display: flex;
+    justify-content: space-between;
+    align-items: center;">
+                                     <div style="display: flex; flex-direction: column;">
+                                         <div style="margin-top: 20px;">Стоимость заказа: {{$constructor->constructor_price}} BYN</div>
+                                         <div style="    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;" class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл</a></div>
+
+                                     </div>
+                                  <div style="margin-top: 20px; margin-left: 10px;" class="mask-qr" >
+                                        <div class="qr" style="background: url('{{asset('/storage/uploads/6GZd6oxwPTGCYLOOKTWJVp5KTtKrMh3rIdJdQsQy.gif')}}');background-size: 100% 100%;" ></div>
+                                    </div>
+                                </div>
                             </section>
+                        @else
+                            <div style="    text-align: right;
+    margin-right: 20px;
+">Цена не определена</div>
                         @endif
+
                     @endif
                 @endforeach
             </ul>
@@ -234,16 +253,9 @@
                                     <div class="mask-mobile"><div class="mask-image" style="background: url({{asset('/storage/' . $detailedCart->mask_img) }});background-size: 100% 100%;"></div></div>
 
                                     <div class="name-qr-wrapper">
-                                        <div class="mask-name">
-                                            {{$detailedCart->mask_name}}
-                                        </div>
-                                        <div class="mask-qr">
-                                            <div class="qr" style="background: url({{asset('/storage/' . $detailedCart->mask_qr) }});background-size: 100% 100%;">
-                                            </div>
-                                        </div>
                                     </div>
-                                    <section class="download">
-                                        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл с инструкциями</a></div>
+                                    <section class="download" style="display: flex; justify-content: center;">
+                                        <div class="cart-next"><a href="{{ \Illuminate\Support\Facades\Storage::url('instructions.zip')}}" download>скачать файл</a></div>
                                     </section>
                                 </div>
                             @endforeach

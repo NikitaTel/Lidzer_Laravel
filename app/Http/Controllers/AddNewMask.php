@@ -13,6 +13,9 @@ class AddNewMask extends Controller
         $price = $request->input('price');
         $image = $request->file('image')->store('uploads', 'public');
         $qr = $request->file('qr')->store('uploads', 'public');
+//        $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(500)
+//            ->format('png')
+//            ->generate($request->input('qr'), public_path('images/qrcode.png'))->store('uploads', 'public');
 
         $mask = new Mask();
         $mask->mask_name= $name;
